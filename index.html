@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plagiarism Similarity Checker</title>
+<style>body{font-family:Arial,sans-serif;background:#f4f6f8;margin:0;padding:30px}main{max-width:700px;margin:auto;background:#fff;padding:25px;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.1)}h1{color:#223}textarea,input[type=text]{width:100%;padding:10px;border:1px solid #ccc;border-radius:8px;font-size:16px}button{margin-top:10px;padding:10px 16px;border:0;border-radius:8px;background:#2563eb;color:#fff;font-size:16px;cursor:pointer}button:hover{background:#1d4ed8}#result{margin-top:20px;padding:15px;background:#eef2ff;border-radius:8px;white-space:pre-wrap}small{color:#666}</style>
+</head>
+<body>
+<main>
+<h1>Plagiarism Similarity Checker</h1>
+<p>Compare two texts and calculate similarity.</p>
+<textarea id="t1" rows="5" placeholder="First text..."></textarea><br><textarea id="t2" rows="5" placeholder="Second text..."></textarea><br><button onclick="analyze()">Compare Texts</button>
+<div id="result"></div>
+</main>
+<script>
+function words(t){return new Set(t.toLowerCase().match(/[a-z0-9]+/g)||[])}function analyze(){const a=words(document.getElementById('t1').value),b=words(document.getElementById('t2').value);if(!a.size||!b.size){document.getElementById('result').textContent='Please enter both texts.';return}let common=0;a.forEach(w=>{if(b.has(w))common++});const sim=common/(a.size+b.size-common)*100;document.getElementById('result').textContent=`Similarity: ${sim.toFixed(2)}%\nCommon words: ${common}`;}
+</script>
+</body>
+</html>
